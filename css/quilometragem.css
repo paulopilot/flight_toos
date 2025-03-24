@@ -1,0 +1,127 @@
+/* Estilos para a página de Registro de Voos */
+
+/* Reset básico */
+body, h1, h2, p, ul, li, a, table, td, th {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+/* Estilos da tabela do cabeçalho */
+.header-table {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.header-table td {
+    border: none;
+    padding: 5px;
+}
+.logo {
+    width: 200px;
+    height: auto;
+}
+.title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Estilos para o formulário de entrada */
+.input-fields {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+}
+.input-fields label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+.input-fields input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.input-fields button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+.input-fields button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos da tabela principal */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+td:nth-child(6) {
+    width: auto;
+    white-space: nowrap;
+}
+.footer {
+    font-weight: bold;
+    text-align: center;
+    background-color: #f2f2f2;
+}
+.action-buttons button {
+    margin-right: 5px;
+}
+.distancia {
+    text-align: right;
+}
+.distancia_total {
+    font-weight: bold;
+    text-align: right;
+    background-color: #f2f2f2;
+}
+
+/* Estilos para impressão */
+@media print {
+    header, nav, footer {
+      display: none;
+    }
+    /* Garante que somente o conteúdo do <main> seja exibido */
+    main {
+      display: block;
+    }
+    
+    /* Outras regras de impressão que você já tinha */
+    body {
+      font-size: 14px;
+      margin: 0;
+      padding: 0;
+    }
+    table {
+      font-size: 12px;
+    }
+    th, td {
+      padding: 4px;
+    }
+    .no-print {
+      display: none;
+    }
+    .input-fields, td:nth-child(6), th:nth-child(6) {
+      display: none;
+    }
+  }
+  
