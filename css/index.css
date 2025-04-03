@@ -1,66 +1,210 @@
-/* Reset básico */
-body, h1, h2, p, ul, li, a {
-  margin: 0;
-  padding: 0;
+/* index.css - Estilos gerais */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  color: #333;
-  line-height: 1.6;
+/* Define a altura total para a página */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
 }
 
+/* Header fixo */
 header {
-  background: #333;
-  color: #fff;
-  padding: 15px 20px;
-  text-align: center;
+    background-color: #141414;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    padding: 0 20px;
+  }
+
+/* Ajuste no .nav-bar se necessário */
+/* Container do menu */
+.nav-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+/* Alinha a lista de menu à esquerda logo após a logo */
+.nav-list {
+    margin-left: 20px; /* espaço entre a logo e os itens */
+  }
+
+/* Menu de navegação */
+.nav-list ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+.nav-item {
+    margin-left: 20px;
+  }
+  
+.nav-link {
+    text-decoration: none;
+    font-size: 14px;
+    color: #00ffff;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: background-color 0.2s;
+  }
+
+.logo img {
+    width: 40px;
+    height: 40px;
+  }
+  
+.nav-link:hover {
+    background-color: #363636;
+    border-radius: 4px;
+  }
+
+.nav-icon {
+    width: 32px;
 }
 
-nav {
-  background: #444;
+.mobile-menu-icon {
+    display: none;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+.mobile-menu {
+    display: none;
 }
+  
 
-nav ul li {
-  margin: 5px;
-}
 
-nav ul li a {
-  text-decoration: none;
-  color: #fff;
-  padding: 10px 15px;
-  display: block;
-}
-
-nav ul li a:hover {
-  background: #666;
-}
-
+/* O container de conteúdo (supondo que esteja dentro de <main><div id="content"></div></main>) */
+/* Ajuste as margens para não ficar atrás do header e footer */
 main {
-  padding: 20px;
-  min-height: 400px;
-  background: #fff;
+    width: 100%;
+    position: absolute;
+    top: 60px;     /* altura do header */
+    /*bottom: 15px;  /* altura do footer */
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+}
+
+
+/* Exemplo de container para conteúdo */
+.content {
+    
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Responsividade */
+@media screen and (max-width: 730px) {
+
+    .nav-item {
+        display: block;
+    }
+
+    .mobile-menu-icon {
+        display: none;
+    }
+
+    .mobile-menu ul {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 1rem;
+    }
+    .mobile-menu .nav-item {
+        display: block;
+        padding-top: 1.2rem;
+    }
+    .open {
+        display: block;
+    }
+
+    .quilometragem {
+        left: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    /* Esconde os botões grandes e exibe os ícones menores */
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: inline-block;
+    width: 24px; /* Define o tamanho do ícone */
+    height: 24px;
+    margin: 5px;
+  }
+    
+    .quilometragem .input-fields {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    .quilometragem .input-fields label {
+        display: inline-block;
+        width: 120px; /* Define uma largura fixa para alinhar os inputs */
+        text-align: left;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    
+    .quilometragem .input-fields input {
+        width: calc(100% - 130px); /* Mantém os inputs alinhados e ocupando o restante do espaço */
+        max-width: 300px;
+        margin-bottom: 10px;
+    }
+    
+    .quilometragem .new_flight {
+        width: 24px; /* Ajusta o tamanho do botão de adicionar voo */
+        height: 24px;
+    }
+    
+    /* Ajuste da tabela */
+    .quilometragem table {
+        width: 100%;
+        font-size: 14px;
+    }
+    
+    .quilometragem th, .quilometragem td {
+        padding: 5px;
+    }
 }
 
 footer {
-  background: #333;
-  color: #fff;
-  text-align: center;
-  padding: 10px 0;
-  font-size: 0.9em;
+    color: #000000;
+    font-size: 12px;
+    /* Remova a margem-top se o footer for fixo */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: #8395a8;
+    padding: 5px 5px;
 }
 
-/* Responsividade para telas menores */
-@media (max-width: 600px) {
-  nav ul {
-    flex-direction: column;
-  }
+footer a {
+    color: #0000ff;
+    text-decoration: none;
 }

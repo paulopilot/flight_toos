@@ -1,27 +1,52 @@
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Pilot Tools carregado.');
+// Função para carregar um fragmento HTML no container #content
+async function loadPage(pageUrl) {
+    try {
+		const response = await fetch(pageUrl);
+		if (!response.ok) {
+			throw new Error("Erro ao carregar a página " + pageUrl);
+		}
+		const html = await response.text();
+		document.getElementById("content").innerHTML = html;
+		
+		// Se o fragmento carregado for o plan-content, inicializa o mapa e os eventos
+		if (pageUrl === "plan-content.html") {
+			// Aguarde um pequeno delay para garantir que o conteúdo esteja no DOM
+			setTimeout(() => {
+				initMapPlan();
+				initPlanEvents();
+				// Se houver um plano salvo, recarrega os dados
+				if (flightPlan && flightPlan.pontos && flightPlan.waypoints && flightPlan.waypoints.length > 0) {
+					// Preenche os campos do formulário
+					document.getElementById("pontos").value = flightPlan.pontos;
+					document.getElementById("velocidade").value = flightPlan.velocidade;
+					document.getElementById("consumo").value = flightPlan.consumo;
+					document.getElementById("alcance").value = flightPlan.alcance / 1852;
+					// Renderiza a tabela e a rota
+					renderTableAndMap(flightPlan.etapas);
+					drawRouteMap();
+				}
+			}, 100);
+		}
 
-  const linkQuilometragem = document.querySelector('a[href="quilometragem.html"]');
-
-  linkQuilometragem.addEventListener('click', function(e) {
-    e.preventDefault(); // Evita o redirecionamento
-
-    fetch('quilometragem.html')
-      .then(response => response.text())
-      .then(data => {
-        // Extrai o conteúdo do <body> da página carregada
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(data, 'text/html');
-        const conteudo = doc.querySelector('body').innerHTML;
-        document.querySelector('main').innerHTML = conteudo;
-
-        // Chama a função que recupera os dados do localStorage e atualiza a tabela
-        if (typeof iniciarPagina === 'function') {
-          iniciarPagina();
-        } else {
-          console.error("A função iniciarPagina não foi encontrada.");
-        }
-      })
-      .catch(error => console.error("Erro ao carregar a página:", error));
+		if (pageUrl === "tools-content.html") {
+			initToolsMenu();
+		}
+    } catch (error) {
+      console.error(error);
+      document.getElementById("content").innerHTML = "<p>Erro ao carregar o conteúdo.</p>";
+    }
+  }
+  
+  // Adiciona event listener aos links do menu
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const page = link.getAttribute("data-page");
+      loadPage(page);
+    });
   });
-});
+  
+  // Carrega a página default (plan-content.html) quando o index.html é carregado
+  window.addEventListener("DOMContentLoaded", () => {
+    loadPage("plan-content.html");
+  });

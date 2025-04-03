@@ -1,38 +1,107 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<meta charset="UTF-8">
-	<title>Pilot Tools</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Importa o CSS externo na subpasta "css" -->
-	<link rel="stylesheet" href="css/index.css">
-	<link rel="stylesheet" href="css/quilometragem.css">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Pilot Tools</title>
+
+  <!-- CSS principal e do plan -->
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/plan.css" />
+  <link rel="stylesheet" href="css/tools.css" />
+  <link rel="stylesheet" href="css/quilometragem.css" />
+  <link rel="stylesheet" href="css/sobre.css" />
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+
+  <!-- Carrega o Leaflet JS antes dos scripts próprios -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+
+  <!-- Scripts próprios (use defer para preservar a ordem) -->
+
+  <script src="js/navigation.js" defer></script>
+  <script src="js/plan.js" defer></script>
+  <script src="js/index.js" defer></script>
+  <script src="js/tools.js" defer></script>
+  <script src="js/quilometragem.js" defer></script>
+
 </head>
 <body>
-	<header>
-		<h1>Pilot Tools</h1>
-	</header>
-  
-	<nav>
-		<ul>
-			<li><a href="flightplan.html">Planejamento de Voos</a></li>
-			<li><a href="quilometragem.html">Tabela de Quilometragem</a></li>
-			<li><a href="conversao_horas.html">Conversão de Horas</a></li>
-			<!-- Acrescente mais links conforme necessário -->
-		</ul>
-	</nav>
-  
-	<main>
-		<h2>Bem-vindo ao Pilot Tools</h2>
-		<p>Este site apresenta diferentes ferramentas como planilha de quilometragem, conversão de horas, planejamento de voo, etc.</p>
-	</main>
-  
-	<footer>
-		<p>&copy; 2025 Pilot Tools. Todos os direitos reservados.</p>
-	</footer>
-  
-	<!-- Importa o JavaScript externo na subpasta "js" -->
-	<script src="js/index.js"></script>
-	<script src="js/quilometragem.js"></script>
+  <header>
+    <nav class="nav-bar">
+      <div class="logo">
+        <img src="img/Logo.png" alt="Logo" />
+      </div>
+      <div class="nav-list">
+        <ul>
+          <!-- data-page indica qual fragmento carregar -->
+          <li class="nav-item" title="Planejamento.">
+            <a href="plan-content.html" class="nav-link" data-page="plan-content.html">
+              <img src="img/map-icon.png" alt="Plan Icon" class="nav-icon"/>
+              Plan
+            </a>
+          </li>
+          <li class="nav-item" title="Ferramentas.">
+            <a href="tools-content.html" class="nav-link" data-page="tools-content.html">
+              <img src="img/tools-icon.png" alt="Tools Icon" class="nav-icon" />
+              Tools
+            </a>
+          </li>
+          <li class="nav-item" title="Sobre.">
+            <a href="sobre-content.html" class="nav-link" data-page="sobre-content.html">
+              <img src="img/about-icon.png" alt="About Icon" class="nav-icon" />
+              About
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="mobile-menu-icon">
+        <button onclick="menuShow()">
+          <img class="icon" src="img/menu_white_36dp.svg" alt="Menu" />
+        </button>
+      </div>
+    </nav>
+    <!-- Menu mobile (opcional) -->
+    <div class="mobile-menu">
+      <ul>
+        <li class="nav-item">
+          <a href="plan-content.html" class="nav-link" data-page="plan-content.html">
+            <img src="img/map-icon.png" alt="Plan Icon" class="nav-icon" />
+            Plan
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="tools.html" class="nav-link" data-page="tools.html">
+            <img src="img/tools-icon.png" alt="Tools Icon" class="nav-icon" />
+            Tools
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="sobre.html" class="nav-link" data-page="sobre.html">
+            <img src="img/about-icon.png" alt="About Icon" class="nav-icon" />
+            About
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Container para carregar o fragmento -->
+  <main>
+    <div id="content" class="content"></div>
+  </main>
+
+  <footer>
+    <p class="main">
+      Copyright 2025 © Pilot Tools | Design by
+      <a href="#" target="_blank">Paulo Almeida</a>
+    </p>
+  </footer>
 </body>
 </html>

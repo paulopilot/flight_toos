@@ -1,0 +1,94 @@
+<!-- plan-content.html -->
+<!-- Barra fixa abaixo do menu -->
+<div class="fixed-bar">
+	<div onclick="openContainer()" class="btn">Flight Plan</div>
+    <div id="utcClock">00:00:00</div>
+</div>
+
+<!-- Mapa Leaflet -->
+<div id="map"></div>
+
+<!-- Ajuste a margem-top para não sobrepor a barra fixa -->
+<div class="modal-container" id="modal-container">
+	<!-- Cabeçalho com ícones e campo de rota -->
+	<div class="modal-header">
+		<img src="img/book-icon.png" class="header-icon" alt="Book Icon" />
+		<input type="text" id="pontos" name="pontos" placeholder="EX: SBFZ, 043415S0374611W, SBMS" title="Digite os ponto da rota seprados por um espaço."/>
+		<div id="pontos-notify" class="input-notify"></div>
+		<div class="invert-button">
+			<button class="icon-button" id="invertRouteBtn" title="Inverter Rota">
+				<img src="img/invert-icon.png" alt="Invert Route" />
+			</button>
+		</div>
+		<div class="invert-button">
+			<button class="icon-button close-button" id="fechar" title="Fechar">
+				<img src="img/close-icon.png" alt="Fechar" />
+			</button>
+		</div>
+	</div>
+  
+	<!-- Inputs adicionais -->
+	<div class="param-inputs">
+		<div class="input-block">
+		  <label for="velocidade">Speed (Kt)</label>
+		  <input type="number" id="velocidade" placeholder="Ex: 140" title="Velocidade em Knots."/>
+		</div>
+		<div class="input-block">
+		  <label for="consumo">Burn (un/h)</label>
+		  <input type="number" id="consumo" placeholder="Ex: 600" title="Consumo estimado em unidades/hora"/>
+		</div>
+		<div class="input-block">
+		  <label for="alcance">Range (NM)</label>
+		  <input type="number" id="alcance" placeholder="Ex: 200" title="Range em NM."/>
+		</div>
+	</div>
+  
+	<!-- Tabela de planejamento -->
+	<div class="table-scroll">
+	  <table id="flightData">
+		<thead>
+		  <tr>
+			<th>Waypoint</th>
+			<th>HDG</th>
+			<th>DIST</th>
+			<th>ETE</th>
+			<th>ETA</th>
+			<th>Burn</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <!-- Linhas dinâmicas -->
+		</tbody>
+	  </table>
+	</div>
+  
+	<!-- Botão para adicionar waypoint -->
+	<div class="add-waypoint">
+		<button id="addWaypointBtn">
+		  <img src="img/add-icon.png" alt="Add" />
+		  <span>Add Waypoint</span>
+		</button>
+	</div>
+
+	<!-- Área para dados do novo waypoint-->
+	<div class="new-waypoint">
+
+	</div>
+  
+	<!-- Sumário -->
+	<div class="table-scroll">
+		<table class="summary-table">
+			<tbody>
+				<tr>
+					<td>Summary</td>
+					<td id="summary-dist">000.0</td>
+					<td id="summary-ete">00:00</td>
+					<td id="summary-eta">00:00</td>
+					<td id="summary-burn">000.0</td>
+				</tr>
+			</tbody>
+		</table>
+	  </div>
+  </div>
+
+

@@ -1,0 +1,87 @@
+/* tools.css - Estilos para a área Tools */
+
+/* Container principal */
+.tools-container {
+  display: flex;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Menu vertical à esquerda */
+.tools-menu {
+  width: 150px; /* Largura padrão para desktop */
+  background-color: #313443;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Lista de itens do menu */
+.tools-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #fff;
+}
+
+/* Itens do menu */
+.tools-menu ul li {
+  padding: 28px 0;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.12s ease-out;
+}
+
+/* Ícones do menu */
+.tools-menu ul li img.icon_menu {
+  width: 36px;
+  height: 36px;
+}
+
+/* Tooltip: aparece ao passar o mouse */
+.tools-menu ul li .tooltip {
+  display: inline-block;
+  position: absolute;
+  left: 100%; /* Posiciona à direita do item */
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #313443;
+  padding: 8px 15px;
+  border-radius: 3px;
+  margin-left: 8px;
+  opacity: 0;
+  visibility: hidden;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  transition: opacity 0.3s;
+}
+
+.tools-menu ul li:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Estado ativo do item */
+.tools-menu ul li.active {
+  background-color: #22252e;
+}
+
+/* Área de conteúdo onde serão carregados os fragments */
+.tools-content {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Responsividade: em telas pequenas, exibir somente o ícone */
+@media screen and (max-width: 600px) {
+  .tools-menu {
+    width: 60px;
+    padding: 10px 5px;
+  }
+  .tools-menu ul li .tooltip {
+    display: none;
+  }
+}

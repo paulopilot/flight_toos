@@ -1,0 +1,437 @@
+/* plan.css - Estilos específicos para a página Plan */
+
+@keyframes slideFadeIn {
+	from { opacity: 0; transform: translateY(-20px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideFadeOut {
+	from { opacity: 1; transform: translateY(0); }
+	to   { opacity: 0; transform: translateY(-20px); }
+}
+
+.modal-container {
+	max-width: 450px;
+	background-color: #141414;
+	color: #fff;
+	padding: 10px;
+	border-radius: 8px;
+	position: fixed;
+	top: 84px;
+	z-index: 1000;
+	display: none;
+	font-family: Arial, sans-serif;
+
+	opacity: 0;
+	transform: translateY(-20px);
+	transition: none;
+	pointer-events: none;
+  }
+
+  .modal-header {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	margin-bottom: 10px;
+  }
+
+  .modal-container input {
+	background-color: #3C3C3C;
+	color: #ffffff;
+	border: 1px solid #666;
+  }
+  
+  .header-icon {
+	width: 22px;
+	height: 22px;
+  }
+  .modal-header input {
+	flex-grow: 1;
+	padding: 5px;
+	font-size: 12px;
+	border-radius: 4px;
+	border: none;
+  }
+
+  .input-notify {
+    position: absolute;
+    background-color: #ddb502;
+    color: #000000;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    top: 45px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10;
+ }
+
+  .invert-button {
+    width: 30px;            /* igual ao botão fechar */
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;         /* impede que o tamanho mude em layout flex */
+	border-radius: 8px;
+  }
+
+  .invert-button:hover{
+	background-color: #343434;
+  }
+
+  .input-notify.show {
+    opacity: 1;
+  }
+  
+  .icon-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+  }
+  
+  .icon-button img {
+	width: 20px;
+	height: 20px;
+  }
+
+  .close-button {
+	background-color: transparent;
+	border: none;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+  }
+  
+  .close-button img {
+	width: 100%;
+	height: 100%;
+  }
+
+  .param-inputs {
+	display: flex;
+	justify-content: space-between;
+	gap: 6px;
+	margin-bottom: 10px;
+  }
+  
+  .input-block {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	min-width: 0;
+  }
+  
+  .input-block label {
+	font-size: 11px;
+	color: #fff;
+	margin-bottom: 2px;
+	font-weight: 500;
+  }
+  
+  .input-block input {
+	font-size: 11px;
+	padding: 4px;
+	border: none;
+	border-radius: 4px;
+	width: 100%;
+	box-sizing: border-box;
+  }
+  
+  .table-scroll {
+	max-height: 140px;
+	overflow-y: auto;
+	margin-bottom: 10px;
+	background-color: #363636;  /* Novo fundo para separação visual */
+	padding: 5px;
+	border-radius: 4px;
+	width: 100%; /* Garante que respeite o container pai */
+	box-sizing: border-box;
+  }
+
+  .table-scroll thead th{
+	text-align:center;
+  }
+
+  /* Atualizado com as mudança até aqui */
+
+  /* Corde font */
+.modal-container h2{
+	color: #fff;
+}
+
+.modal-container.mostrar{
+    display: block;
+	animation: slideFadeIn 0.4s ease forwards;
+	pointer-events: auto;
+}
+
+.modal-container.fechar {
+	animation: slideFadeOut 0.9s ease forwards;
+	pointer-events: none;
+}
+
+.mostrar .modal{
+	animation: animate-modal .9s;
+}
+
+.fechar{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: #ff0000;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14pt; /* Ajustei o tamanho da fonte para um melhor ajuste */
+    cursor: pointer;
+    display: flex; /* Habilita o uso do flexbox */
+    justify-content: center; /* Alinha horizontalmente ao centro */
+    align-items: center; /* Alinha verticalmente ao centro */
+  }
+  
+.fechar:hover {
+    background-color: #c0392b;
+  }
+  
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+
+  }
+  
+label {
+    font-weight: bold;
+    font-size: 12px;
+  }
+  
+input {
+    padding: 0.3rem;
+    font-size: 11px;
+}
+  
+button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+  
+
+/* Estilos para a tabela flightData */
+#flightData {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 11px;
+	text-align: center;
+  }
+
+  #flightData thead th {
+	position: sticky;
+	top: 0;
+	background-color: #444;
+	color: #fff;
+  }
+  
+  #flightData th, #flightData td {
+	border: 1px solid #888;
+	padding: 3px;
+  }
+
+  .add-waypoint {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+  }
+  
+  #addWaypointBtn {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	background-color: #141414;
+	color: white;
+	padding: 6px 10px;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	width: auto;
+	transition: background-color 0.2s ease, transform 0.15s ease;
+  }
+  
+  #addWaypointBtn:hover {
+	background-color: #363636;
+	/* transform: scale(1.03); */
+  }
+
+  
+  #addWaypointBtn img {
+	width: 24px;
+	height: 24px;
+  }
+
+
+/* fundo da tabela onde estão os inputs */
+#flightData th {
+	background-color: rgb(29, 29, 29);
+	color: #fff;
+  }
+
+  .summary-table {
+	width: 100%; /* 96% com scroll */
+	border-collapse: collapse;
+	background-color: #000;
+	color: cyan;
+	font-weight: bold;
+	font-size: 13px;
+	text-align: center;
+  }
+
+  .summary-table td:first-child {
+	text-align: left;
+	color: #fff;
+  }
+
+  .summary-table td {
+	border: 1px solid #333;
+	padding: 4px;
+	
+  }
+
+  .summary-table td:nth-child(1){
+	text-align: right;
+	width: 39%; /* 39% com scroll */
+  }
+
+  .summary-table td:nth-child(2),
+  .summary-table td:nth-child(5) {
+	padding: 4px;
+	text-align: right;
+
+  }
+
+  .summary-table td:nth-child(3),
+  .summary-table td:nth-child(4) {
+	text-align: center;
+	padding: 4px;
+  }
+
+  
+/* Estilos para a tabela resultTable com cabeçalho e rodapé fixos */
+/* Container para a tabela com rolagem vertical */
+.table-container {
+	max-height: 195px; /* Ajuste conforme necessário */
+	overflow-y: auto;
+	color: #00ffff;
+  }
+  
+  /* Tabela com largura total e layout fixo */
+  #resultTable {
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	font-size: 11px; /* Tamanho de fonte um pouco menor */
+  }
+  
+  /* Cabeçalho fixo */
+  #resultTable thead th {
+	position: sticky;
+	top: 0;
+	color: #afafaf;
+	background-color: #000000;
+	z-index: 2;
+
+  }
+  
+  /* Rodapé fixo */
+  #resultTable tfoot td {
+	font-weight: bold; 
+	text-align: center; 
+	background-color: #000000;
+	position: sticky;
+	color: #afafaf;
+	z-index: 2
+  }
+  
+  /* Células com larguras iguais (supondo 6 colunas) */
+  #resultTable th,
+  #resultTable td {
+	border: 1px solid #ccc;
+	padding: 4px;
+	text-align: center;
+	box-sizing: border-box;
+	width: calc(100% / 6);
+  }
+  
+#map {
+    width: 100vw;
+    height: calc(100vh - 60px - 7px); /* considerando altura da barra fixa */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    z-index: 1;
+	/* outline: 2px dashed red; */
+}
+
+ 
+/* Barra fixa abaixo do menu */
+.fixed-bar {
+	position: fixed;
+	top: 60px; /* altura do header */
+	left: 0;
+	width: 100%;
+	height: 24px;
+	background-color: rgba(0, 0, 0, 0.5); /* 50% de transparência */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 20px;   /* 20px da margem esquerda */
+	padding-right: 50px;  /* 25px da margem direita */
+	z-index: 9999; /* Valor alto para sobrepor os elementos do mapa */
+	font-size: 12px;
+	color: #fff;
+  }
+
+/* Estilo para o link Flight Plan */
+.fixed-bar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Botão Flight Plan: remove o transform e posiciona naturalmente */
+.btn {
+	height: 20px;
+	padding: 2px 10px;
+	background-color: #141414;
+	border-radius: 5px 5px 0 0; /* apenas os cantos superiores */
+	color: #fff;
+	cursor: pointer;
+	transition: background-color 0.5s;
+}
+
+.btn:hover{
+	/*background-color: #363636;*/
+	transform: scale(1.1); /* aumenta 10% */
+    transition: transform 0.3s ease;
+}
+
+/* Estilo para o relógio */
+#utcClock {
+    font-family: monospace;
+	padding-right: 25px;  /* 25px da margem direita */
+}

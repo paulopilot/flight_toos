@@ -20,7 +20,7 @@ body {
     border: none;
     padding: 5px;
 }
-.logo {
+.logo-km {
     width: 200px;
     height: auto;
 }
@@ -64,12 +64,13 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 th, td {
     border: 1px solid black;
-    padding: 8px;
+    padding: 2px;
     text-align: left;
+    font-size: 12px;
 }
 th {
     background-color: #f2f2f2;
@@ -93,6 +94,11 @@ td:nth-child(6) {
     font-weight: bold;
     text-align: right;
     background-color: #f2f2f2;
+}
+
+.del_flight{
+    width: 16px;
+    height: 16px;
 }
 
 /* Estilos para impressão */

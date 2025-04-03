@@ -1,74 +1,65 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Voos</title>
-</head>
-<body>
-
-    <!-- Cabeçalho com Logotipo, Título e Nome do Tripulante -->
+<!-- quilometragem.html -->
+<div class="quilometragem">
+    <!-- Cabeçalho com logotipo, título e nome do tripulante -->
     <table class="header-table">
-        <tr>
-            <td style="width: 20%;">
-				<img src="img/Logo-Executive-200px.png" alt="Logotipo" class="logo">
-            </td>
-            <td class="title" style="width: 60%;">Registro de Voos</td>
-            <td style="width: 20%;"></td>
-        </tr>
+      <tr>
+        <td style="width: 20%;">
+          <img src="img/Logo-Executive-200px.png" alt="Logotipo" class="logo-km">
+        </td>
+        <td class="title" style="width: 60%;">Registro de Voos</td>
+        <td style="width: 20%;"></td>
+      </tr>
     </table>
     
-    <!-- Formulário para inserir o nome do tripulante e dados do voo -->
+    <!-- Formulário para inserir dados do voo -->
     <div class="input-fields">
-        <label for="tripulante">Nome do Tripulante:</label>
-        <input type="text" id="tripulante" placeholder="Digite o nome do tripulante" required oninput="this.value = this.value.toUpperCase();">
-        
-        <label for="date">Data:</label>
-        <input type="date" id="date" required>
-
-        <label for="aircraft">Aeronave:</label>
-        <input type="text" id="aircraft" required oninput="this.value = this.value.toUpperCase();">
-
-        <label for="origin">Origem:</label>
-        <input type="text" id="origin" required oninput="this.value = this.value.toUpperCase();">
-
-        <label for="destination">Destino:</label>
-        <input type="text" id="destination" required oninput="this.value = this.value.toUpperCase();">
-
-        <button type="submit" onclick="adicionarVoo()">Adicionar Voo</button>
+      <label for="tripulante">Nome do Tripulante:</label>
+      <input type="text" id="tripulante" placeholder="Digite o nome do tripulante" required oninput="this.value = this.value.toUpperCase();">
+      
+      <label for="date">Data:</label>
+      <input type="date" id="date" required>
+    
+      <label for="aircraft">Aeronave:</label>
+      <input type="text" id="aircraft" required oninput="this.value = this.value.toUpperCase();">
+    
+      <label for="origin">Origem:</label>
+      <input type="text" id="origin" required oninput="this.value = this.value.toUpperCase();">
+    
+      <label for="destination">Destino:</label>
+      <input type="text" id="destination" required oninput="this.value = this.value.toUpperCase();">
+    
+      <button type="submit" onclick="adicionarVoo()">Adicionar Voo</button>
     </div>
     
     <div id="tripulanteDisplay" class="tripulante-label">
-        Tripulante: <span class="tripulante-name" id="tripulante-name"></span>
+      Tripulante: <span class="tripulante-name" id="tripulante-name"></span>
     </div>
-
+    
     <!-- Tabela Principal -->
     <table id="flightsTable">
-        <thead>
-            <tr>
-                <th>Data</th>
-                <th>Aeronave</th>
-                <th>Origem</th>
-                <th>Destino</th>
-                <th>Distância (km)</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Os dados serão adicionados aqui pelo JavaScript -->
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="4" class="footer">Total de quilômetros voados:</td>
-                <td class="distancia_total">0 km</td>
-            </tr>
-        </tfoot>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Aeronave</th>
+          <th>Origem</th>
+          <th>Destino</th>
+          <th>Distância (km)</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Os dados serão adicionados via JavaScript -->
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4" class="footer">Total de quilômetros voados:</td>
+          <td class="distancia_total">0 km</td>
+        </tr>
+      </tfoot>
     </table>
-
+    
     <!-- Botões de Ação -->
     <button onclick="window.print()" class="no-print">Imprimir</button>
     <button onclick="limparTodosOsVoos()" class="no-print">Limpar</button>
-
-    
-</body>
-</html>
+  </div>
+  

@@ -1,14 +1,17 @@
 // Variáveis globais para armazenar os voos e o nome do tripulante
 let nomeTripulante = localStorage.getItem("tripulante") || "";
-let flights = JSON.parse(localStorage.getItem("flights")) || [];
+let flightsRecords = JSON.parse(localStorage.getItem("flightsRecords")) || [];
 
-// Inicializa a página ao carregar
+/*
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", iniciarPagina);
 } else {
     iniciarPagina();
-}
+}*/
 
+/**
+ * Inicializa página carregando voos salvos
+ */
 function iniciarPagina() {
     if (nomeTripulante) {
         document.getElementById("tripulante").value = nomeTripulante;
@@ -17,45 +20,21 @@ function iniciarPagina() {
     atualizarTabela();
 }
 
-// Função para calcular a distância entre duas coordenadas usando a fórmula de Haversine
-function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; // Raio da Terra em km
-    const φ1 = lat1 * Math.PI / 180;
-    const φ2 = lat2 * Math.PI / 180;
-    const Δφ = (lat2 - lat1) * Math.PI / 180;
-    const Δλ = (lon2 - lon1) * Math.PI / 180;
 
-    const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-              Math.cos(φ1) * Math.cos(φ2) *
-              Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c;
-    return distance;
-}
-
-// Função para obter as coordenadas usando a API do DECEA
-function obterCoordenadas(icao) {
-    const url = `https://api.decea.mil.br/aisweb/?apiKey=2025912383&apiPass=e8a8940a-7120-11ee-a2b8-0050569ac2e1&area=rotaer&icaoCode=${icao}`;
-    return fetch(url)
-        .then(response => response.text())
-        .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-        .then(data => {
-            const lat = data.querySelector("lat").textContent;
-            const lng = data.querySelector("lng").textContent;
-            return { lat: parseFloat(lat), lon: parseFloat(lng) };
-        })
-        .catch(error => {
-            console.error("Erro ao buscar coordenadas:", error);
-            return null;
-        });
-}
-
-// Função para formatar a data no formato dd/mm/aaaa
+/**
+ * Função para formatar a data no formato dd/mm/aaaa
+ * @param {date} inputDate 
+ * @returns dd/mm/aaaa
+ */
 function formatDate(inputDate) {
     const [year, month, day] = inputDate.split('-');
     return `${day}/${month}/${year}`;
 }
 
+/**
+ * Adiciona voo
+ * 
+ */
 function adicionarVoo() {
     const date = document.getElementById("date").value;
     const aircraft = document.getElementById("aircraft").value;
@@ -73,15 +52,15 @@ function adicionarVoo() {
     nameCrew.textContent = nomeTripulante;
     localStorage.setItem("tripulante", nomeTripulante);
 
-    Promise.all([obterCoordenadas(origin), obterCoordenadas(destination)]).then(([originCoordinates, destinationCoordinates]) => {
+    Promise.all([getAirport(origin), getAirport(destination)]).then(([originCoordinates, destinationCoordinates]) => {
         if (!originCoordinates || !destinationCoordinates) {
             alert("Erro ao obter coordenadas. Verifique os códigos ICAO.");
             return;
         }
 
-        let distance = Number(calculateDistance(
-            originCoordinates.lat, originCoordinates.lon,
-            destinationCoordinates.lat, destinationCoordinates.lon
+        let distance = Number(calcularDistancia(
+            originCoordinates.lat, originCoordinates.lng,
+            destinationCoordinates.lat, destinationCoordinates.lng
         )).toFixed(1);
 
         // Se origem e destino forem iguais, solicitar a distância ao usuário
@@ -96,7 +75,7 @@ function adicionarVoo() {
             distance = parseFloat(userDistance).toFixed(1);
         }
 
-        flights.push({ date, aircraft, origin, destination, distance });
+        flightsRecords.push({ date, aircraft, origin, destination, distance });
         salvarVoos();
         atualizarTabela();
     }).catch(error => {
@@ -105,15 +84,21 @@ function adicionarVoo() {
     });
 }
 
+/**
+ * Salva voos
+ */
 function salvarVoos() {
-    localStorage.setItem("flights", JSON.stringify(flights));
+    localStorage.setItem("flightsRecords", JSON.stringify(flightsRecords));
 }
 
+/**
+ * Atualiza tabela com os voos salvos
+ */
 function atualizarTabela() {
     const tableBody = document.getElementById("flightsTable").getElementsByTagName('tbody')[0];
     tableBody.innerHTML = "";
 
-    flights.forEach((voo, index) => {
+    flightsRecords.forEach((voo, index) => {
         const row = tableBody.insertRow();
         row.innerHTML = `
             <td>${formatDate(voo.date)}</td>
@@ -122,29 +107,36 @@ function atualizarTabela() {
             <td>${voo.destination}</td>
             <td class="distancia">${voo.distance} km</td>
             <td class="action-buttons">
-                <button onclick="deleteFlight(${index})">Excluir</button>
+                <img src="img/del-button.png" alt="Adicionar Voo" class="del_flight" onclick="deleteFlight(${index})">
             </td>
         `;
     });
 
+    //<button class="new_flight" type="submit" onclick="deleteFlight(${index})">X</button>
+    //<button onclick="deleteFlight(${index})">Excluir</button>
+    //<img src="img/del-button.png" alt="Adicionar Voo" class="del_flight" onclick="deleteFlight(${index})">
     updateTotalDistance();
 }
 
+/**
+ * Apaga um determinado voo pelo valor do index
+ * @param {numer} index 
+ */
 function deleteFlight(index) {
-    flights.splice(index, 1);
+    flightsRecords.splice(index, 1);
     salvarVoos();
     atualizarTabela();
 }
 
 function limparTodosOsVoos() {
     if (confirm("Tem certeza de que deseja apagar todos os registros?")) {
-        flights = [];
-        localStorage.removeItem("flights");
+        flightsRecords = [];
+        localStorage.removeItem("flightsRecords");
         atualizarTabela();
     }
 }
 
 function updateTotalDistance() {
-    let totalDistance = flights.reduce((acc, voo) => acc + parseFloat(voo.distance), 0);
+    let totalDistance = flightsRecords.reduce((acc, voo) => acc + parseFloat(voo.distance), 0);
     document.querySelector(".distancia_total").innerText = totalDistance.toFixed(1) + " km";
 }
